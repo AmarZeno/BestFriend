@@ -17,7 +17,7 @@ public class BallHit : MonoBehaviour {
          //   this.gameObject.rigidbody.addf .rigidbody.AddForce(vec); // , Impluse);
 
 
-            this.GetComponent<Rigidbody>().AddForce(vec);
+          //  this.GetComponent<Rigidbody>().AddForce(vec);
         }
     }
 }
