@@ -4,6 +4,8 @@ using System.Collections;
 public class Raycast : MonoBehaviour {
 
     public GameObject infoboxCanvas;
+    public GameObject tvTextPanel;
+    public GameObject crossHair;
 
     void Awake()
     {
@@ -28,10 +30,20 @@ public class Raycast : MonoBehaviour {
             if (hit.collider.name == "TV")
             {
                 infoboxCanvas.SetActive(true);
+                if (Input.GetMouseButton(0)) {
+                    tvTextPanel.SetActive(true);
+                    crossHair.SetActive(false);
+                }
             }
             else
             {
                 infoboxCanvas.SetActive(false);
+
+                // Hide all the active components if any
+                tvTextPanel.SetActive(false);
+
+                // Show the crosshair
+                crossHair.SetActive(true);
             }
         }
     }
