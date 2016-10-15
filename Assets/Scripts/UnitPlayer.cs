@@ -25,11 +25,11 @@ public class UnitPlayer : Unit {
 
         move = transform.TransformDirection(move);
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            jump = true;
-        }
+        //if (Input.GetKeyDown(KeyCode.Space)) {
+        //    jump = true;
+        //}
 
-        running = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+      //  running = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 
         base.Update();
 	}
