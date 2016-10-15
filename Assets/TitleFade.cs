@@ -35,7 +35,7 @@ public class TitleFade: MonoBehaviour {
         {
             titleTextBox.GetComponent<Graphic>().CrossFadeAlpha(0.0f, fadeDuration, true);
             titleState++;
-
+ 
         }
 
         if (Time.realtimeSinceStartup > currTime + 5 && titleState == 2)
