@@ -32,7 +32,7 @@ public class Raycast : MonoBehaviour {
         if (Physics.Raycast(ray, out hit, 100))
         {
             // Debug.DrawRay(camera.position, camera.forward * 10, Color.green);
-         //   Debug.Log(hit.collider.name);
+            Debug.Log(hit.collider.name);
             if (hit.collider.name == "TV")
             {
                 infoboxCanvas.SetActive(true);
