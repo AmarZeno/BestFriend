@@ -109,11 +109,6 @@ public class DialogueScript : MonoBehaviour {
         }
 
 
-
-
-
-
-
         if (Time.realtimeSinceStartup > currTime + waitTime && displayState == 1)
         {
             IncomingText.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
@@ -130,14 +125,6 @@ public class DialogueScript : MonoBehaviour {
 
         if (Time.realtimeSinceStartup > currTime + 7.0f && textEnd == true)
         {
-            BlackScreenImage.GetComponent<Graphic>().CrossFadeAlpha(0.01f, 0.01f, true);
-            BlackScreen.SetActive(true);
-            BlackScreenImage.GetComponent<Graphic>().CrossFadeAlpha(1.0f, 3.0f, true);
-
-            IncomingText.SetActive(false);
-            ResponseText1.SetActive(false);
-            ResponseText2.SetActive(false);
-            ResponseText3.SetActive(false);
 
             textEnd = false;
             DenialSceneScript.textOver = true; 
