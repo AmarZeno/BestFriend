@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
 public class Raycast : MonoBehaviour {
 
     public GameObject infoboxCanvas;
     public GameObject tvTextPanel;
     public GameObject lampLight;
     public bool isLampLightCoroutineExecuting = false;
+    public bool isRadioCoroutineExecuting = false;
     public GameObject crossHair;
 
     public float thickness = 0.5f;
@@ -48,7 +50,10 @@ public class Raycast : MonoBehaviour {
                 {
                     StartCoroutine(ToggleLampLight());
                 }
-            } else  {
+            } else if (hit.collider.name == "Stereo") {
+                infoboxCanvas.SetActive(true);
+                StartCoroutine(ToggleRadio());
+            } else {
                 infoboxCanvas.SetActive(false);
 
                 // Hide all the active components if any
@@ -75,5 +80,19 @@ public class Raycast : MonoBehaviour {
             lampLight.SetActive(!lampLight.activeSelf);
             isLampLightCoroutineExecuting = false;
         }
+    }
+
+    public IEnumerator ToggleRadio() {
+        yield return new WaitForSeconds(0.3f);
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.Play();
+        audio.Play(44100);
+        //if (isRadioCoroutineExecuting == true)
+        //{
+        //    yield return new WaitForSeconds(0.3f);
+        //}
+        //else {
+        //    yield return new WaitForSeconds(0.3f);
+        //}
     }
 }
