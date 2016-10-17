@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TextController : MonoBehaviour {
 
@@ -46,6 +47,7 @@ public class TextController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
         waitTime = fadeDuration + 0.5f;
 
         BlackScreenImage = BlackScreen.GetComponent<Image>();
@@ -115,13 +117,18 @@ public class TextController : MonoBehaviour {
             selectTextBox2.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
             click = 0;
         }
-        if (Time.realtimeSinceStartup > currTime + 6.0f && title == 1)
+        if (Time.realtimeSinceStartup > currTime + 5.0f && title == 1)
         {
             titleTextBox.GetComponent<Graphic>().CrossFadeAlpha(0.01f, 0.01f, true);
             titleTextBox.SetActive(true);
-            titleTextBox.GetComponent<Graphic>().CrossFadeAlpha(1.0f, 3.0f, true);
+            titleTextBox.GetComponent<Graphic>().CrossFadeAlpha(1.0f, 2.0f, true);
             title++;
         }
+        if (Time.realtimeSinceStartup > currTime + 8.0f && title == 2)
+        {
+            SceneManager.LoadScene("Denial");
+        }
+
 
     }
 
@@ -147,5 +154,11 @@ public class TextController : MonoBehaviour {
 
 
 
+    }
+
+    public void playMusic()
+    {
+        AudioSource music = GetComponent<AudioSource>();
+        music.Play();
     }
 }

@@ -49,7 +49,7 @@ public class TitleFade: MonoBehaviour {
         {
             BlackScreen.SetActive(false);
             titleTextBox.SetActive(false);
-
+            titleState++;
         }
 
     }
