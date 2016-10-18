@@ -2,41 +2,37 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class DialogueScript : MonoBehaviour {
+public class DialogueScriptBargain : MonoBehaviour {
 
 
     public GameObject BlackScreen;
     Graphic BlackScreenImage;
 
-    public GameObject Phone;
-    public AudioSource ringtone;
-
     public GameObject IncomingText;
     public GameObject ResponseText1;
     public GameObject ResponseText2;
     public GameObject ResponseText3;
-    public GameObject ActionText;
+    //public GameObject ActionText;
 
     public Text displayText1;
     public Text displayText2;
     public Text displayText3;
     public Text displayText4;
-    public Text displayText5;
+   // public Text displayText5;
 
     public TextAsset sceneScript1;
     public TextAsset sceneScript2;
     public TextAsset sceneScript3;
     public TextAsset sceneScript4;
-    public TextAsset sceneScript5;
+    //public TextAsset sceneScript5;
 
     public string[] displayLines1;
     public string[] displayLines2;
     public string[] displayLines3;
     public string[] displayLines4;
-    public string[] displayLines5;
+    //public string[] displayLines5;
 
     float currTime;
-    float soundTime;
     float fadeDuration = 1;
     float waitTime;
     float waterfallTime = 0.4f;
@@ -48,6 +44,7 @@ public class DialogueScript : MonoBehaviour {
     int displayState = 5;
     int actionTextLine = 0;
 
+
     public bool textEnd = false;
 
     // Padding constants
@@ -56,10 +53,8 @@ public class DialogueScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        ringtone = Phone.GetComponent<AudioSource>();
         BlackScreenImage = BlackScreen.GetComponent<Image>();
-
-        soundTime = Time.timeSinceLevelLoad+5;
+        
         currTime = 10000;
         waitTime = fadeDuration + 0.5f;
 
@@ -67,7 +62,7 @@ public class DialogueScript : MonoBehaviour {
         ResponseText1.GetComponent<Graphic>().CrossFadeAlpha(0.01f, 0.0f, true);
         ResponseText2.GetComponent<Graphic>().CrossFadeAlpha(0.01f, 0.01f, true);
         ResponseText3.GetComponent<Graphic>().CrossFadeAlpha(0.01f, 0.01f, true);
-        ActionText.GetComponent<Graphic>().CrossFadeAlpha(0.01f, 0.01f, true);
+        //ActionText.GetComponent<Graphic>().CrossFadeAlpha(0.01f, 0.01f, true);
 
         if (sceneScript1 != null || sceneScript2 != null || sceneScript3 != null || sceneScript4 != null)
         {
@@ -75,14 +70,9 @@ public class DialogueScript : MonoBehaviour {
             displayLines2 = (sceneScript2.text.Split('\n'));
             displayLines3 = (sceneScript3.text.Split('\n'));
             displayLines4 = (sceneScript4.text.Split('\n'));
-            displayLines5 = (sceneScript5.text.Split('\n'));
+            //displayLines5 = (sceneScript5.text.Split('\n'));
         }
 
-        if (endLine == 0)
-        {
-            endLine = displayLines1.Length - 1;
-            soundTime = Time.timeSinceLevelLoad;
-        }
 
         updateTextLayout();
     }
@@ -94,18 +84,13 @@ public class DialogueScript : MonoBehaviour {
         displayText2.text = displayLines2[responseLine];
         displayText3.text = displayLines3[responseLine];
         displayText4.text = displayLines4[responseLine];
-        displayText5.text = displayLines5[actionTextLine];
+        //displayText5.text = displayLines5[actionTextLine];
 
-        if(Time.timeSinceLevelLoad > soundTime + 8)
-        {
-            ringtone.Play();
-            soundTime = Time.timeSinceLevelLoad;
-        }
+        
 
-        if (Time.timeSinceLevelLoad> 15 && displayState == 5)
+        if (Time.timeSinceLevelLoad> 10 && displayState == 5)
         {
-            currTime = Time.timeSinceLevelLoad;
-            soundTime = 15000;
+            currTime = Time.timeSinceLevelLoad;;
             displayState =1;
 
         }
@@ -139,12 +124,7 @@ public class DialogueScript : MonoBehaviour {
         //}
 
 
-        if (Time.timeSinceLevelLoad > currTime + 7.0f && textEnd == true)
-        {
-            textEnd = false;
-            DenialSceneScript.textOver = true;
-        }
-
+       
 
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -190,19 +170,61 @@ public class DialogueScript : MonoBehaviour {
         {
             if (input == 1) { responseLine = 1; }
             if (input == 2) { responseLine = 2; }
+            if (input == 3) { responseLine = 3; }
+        }
+        else if (responseLine == 1)
+        {
+            if (input == 1) { responseLine = 2; }
+            if (input == 2) { responseLine = 4; }
             if (input == 3) { responseLine = 2; }
         }
-        else if (responseLine == 1 || responseLine == 2)
+        else if (responseLine == 2)
         {
-            if (input == 1) { responseLine = 3; }
-            if (input == 2) { responseLine = 4; }
-            if (input == 3) { responseLine = 4; }
+            if (input == 1) { responseLine = 5; }
+            if (input == 2) { responseLine = 6; }
+            if (input == 3) { responseLine = 6; }
         }
-        else if (responseLine == 3 || responseLine == 4)
+        else if (responseLine == 3)
         {
-            if (input == 1) { responseLine = 5; actionTextLine = 0; }
-            if (input == 2) { responseLine = 6; actionTextLine = 1; }
-            if (input == 3) { responseLine = 7; actionTextLine = 0; }
+            if (input == 1) { responseLine = 2; }
+            if (input == 2) { responseLine = 5; }
+            if (input == 3) { responseLine = 2; }
+        }
+        else if (responseLine == 4)
+        {
+            if (input == 1) { responseLine = 7; }
+            if (input == 2) { responseLine = 8; }
+            if (input == 3) { responseLine = 8; }
+        }
+        else if (responseLine == 5)
+        {
+            if (input == 1) { responseLine = 9; }
+            if (input == 2) { responseLine = 7; }
+            if (input == 3) { responseLine = 7; }
+        }
+        else if (responseLine == 6)
+        {
+            if (input == 1) { responseLine = 9; }
+            if (input == 2) { responseLine = 9; }
+            if (input == 3) { responseLine = 8; }
+        }
+        else if (responseLine == 7)
+        {
+            if (input == 1) { responseLine = 6; }
+            if (input == 2) { responseLine = 8; }
+            if (input == 3) { responseLine = 9; }
+        }
+        else if (responseLine == 8)
+        {
+            if (input == 1) { responseLine = 9; }
+            if (input == 2) { responseLine = 9; }
+            if (input == 3) { responseLine = 9; }
+        }
+        else if (responseLine == 9)
+        {
+            if (input == 1) { responseLine = 10; actionTextLine = 0; }
+            if (input == 2) { responseLine = 10; actionTextLine = 1; }
+            if (input == 3) { responseLine = 10; actionTextLine = 0; }
             textEnd = true;
         }
     }
