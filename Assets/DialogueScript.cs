@@ -16,6 +16,7 @@ public class DialogueScript : MonoBehaviour {
     public GameObject ResponseText2;
     public GameObject ResponseText3;
     public GameObject ActionText;
+    public GameObject SunBlocker;
 
     public Text displayText1;
     public Text displayText2;
@@ -135,6 +136,7 @@ public class DialogueScript : MonoBehaviour {
 
         if (Time.realtimeSinceStartup > currTime + 10.0f && canShowActionText == true && displayState == 3)
         {
+          //  SunBlocker.SetActive(false);
             ActionText.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
         }
 
