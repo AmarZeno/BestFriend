@@ -39,7 +39,7 @@ public class DenialSceneScript : MonoBehaviour {
         BlackScreenImage = BlackScreen.GetComponent<Image>();
         unitPlayer.enabled = false;
         cameraController.enabled = false;
-        currTime = Time.realtimeSinceStartup;
+        currTime = Time.timeSinceLevelLoad;
         textOver = false;
         textOverTime = 15000;
     }
@@ -48,19 +48,19 @@ public class DenialSceneScript : MonoBehaviour {
     void Update()
     {
 
-        if (Time.realtimeSinceStartup > currTime + 9 && Time.realtimeSinceStartup < currTime + 11)
+        if (Time.timeSinceLevelLoad > currTime + 9 && Time.timeSinceLevelLoad < currTime + 11)
         {
             Camera.transform.Rotate(Vector3.up * Time.deltaTime * -35);
         }
 
         if (textOver == true)
         {
-            textOverTime = Time.realtimeSinceStartup;
+            textOverTime = Time.timeSinceLevelLoad;
             textOver = false;
         }
 
 
-        if (Time.realtimeSinceStartup > textOverTime && transState == 0)
+        if (Time.timeSinceLevelLoad > textOverTime && transState == 0)
         {
             BlackScreenImage.CrossFadeAlpha(0.01f, 0.01f, true);
             BlackScreen.SetActive(true);
@@ -69,7 +69,7 @@ public class DenialSceneScript : MonoBehaviour {
             transState++;
         }
 
-        if (Time.realtimeSinceStartup > textOverTime + 2 && transState == 1)
+        if (Time.timeSinceLevelLoad > textOverTime + 2 && transState == 1)
         {
             IncomingText.SetActive(false);
             ResponseText1.SetActive(false);
@@ -82,7 +82,7 @@ public class DenialSceneScript : MonoBehaviour {
             transState++;
         }
 
-        if (Time.realtimeSinceStartup > textOverTime + 4 && transState == 2)
+        if (Time.timeSinceLevelLoad > textOverTime + 4 && transState == 2)
         {
             BlackScreen.SetActive(false);
             transState++;

@@ -62,7 +62,7 @@ public class DialogueScript : MonoBehaviour {
         ringtone = Phone.GetComponent<AudioSource>();
         BlackScreenImage = BlackScreen.GetComponent<Image>();
 
-        soundTime = Time.realtimeSinceStartup+5;
+        soundTime = Time.timeSinceLevelLoad+5;
         currTime = 10000;
         waitTime = fadeDuration + 0.5f;
 
@@ -84,7 +84,7 @@ public class DialogueScript : MonoBehaviour {
         if (endLine == 0)
         {
             endLine = displayLines1.Length - 1;
-            soundTime = Time.realtimeSinceStartup;
+            soundTime = Time.timeSinceLevelLoad;
         }
 
         updateTextLayout();
@@ -99,33 +99,33 @@ public class DialogueScript : MonoBehaviour {
         displayText4.text = displayLines4[responseLine];
         displayText5.text = displayLines5[actionTextLine];
 
-        if(Time.realtimeSinceStartup > soundTime + 8)
+        if(Time.timeSinceLevelLoad > soundTime + 8)
         {
             ringtone.Play();
-            soundTime = Time.realtimeSinceStartup;
+            soundTime = Time.timeSinceLevelLoad;
         }
 
-        if (Time.realtimeSinceStartup> 15 && displayState == 5)
+        if (Time.timeSinceLevelLoad> 15 && displayState == 5)
         {
-            currTime = Time.realtimeSinceStartup;
+            currTime = Time.timeSinceLevelLoad;
             soundTime = 15000;
             displayState = 1;
         }
 
-        if (Time.realtimeSinceStartup > currTime + fadeDuration && displayState ==0)
+        if (Time.timeSinceLevelLoad > currTime + fadeDuration && displayState ==0)
         {
             choice(selection);
             displayState++;
         }
 
 
-        if (Time.realtimeSinceStartup > currTime + waitTime && displayState == 1)
+        if (Time.timeSinceLevelLoad > currTime + waitTime && displayState == 1)
         {
             IncomingText.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
             displayState++;
         }
 
-        if (Time.realtimeSinceStartup > currTime + waitTime + waterfallTime && displayState == 2)
+        if (Time.timeSinceLevelLoad > currTime + waitTime + waterfallTime && displayState == 2)
         {
             ResponseText1.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
             ResponseText2.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
@@ -134,32 +134,33 @@ public class DialogueScript : MonoBehaviour {
         }
 
 
-        if (Time.realtimeSinceStartup > currTime + 10.0f && canShowActionText == true && displayState == 3)
+        if (Time.timeSinceLevelLoad > currTime + 10.0f && canShowActionText == true && displayState == 3)
         {
           //  SunBlocker.SetActive(false);
             ActionText.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
         }
 
-        if (Time.realtimeSinceStartup > currTime + 18.0f && canShowActionText == true && displayState == 3)
+        if (Time.timeSinceLevelLoad > currTime + 18.0f && canShowActionText == true && displayState == 3)
         {
             ActionText.GetComponent<Graphic>().CrossFadeAlpha(0.00f, 0.01f, true);
             actionTextLine = 2;
             displayState++;
         }
 
-        if (Time.realtimeSinceStartup > currTime + 108.0f && canShowActionText == true)
+        if (Time.timeSinceLevelLoad > currTime + 108.0f && canShowActionText == true)
         {
             ActionText.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
             displayState++;
         }
 
-        if (Time.realtimeSinceStartup > currTime + 118.0f && canShowActionText == true)
+        if (Time.timeSinceLevelLoad > currTime + 118.0f && canShowActionText == true)
         {
             ActionText.GetComponent<Graphic>().CrossFadeAlpha(0.01f, 0.01f, true);
         }
 
 
-        if (Time.realtimeSinceStartup > currTime + 7.0f && textEnd == true)
+
+        if (Time.timeSinceLevelLoad > currTime + 7.0f && textEnd == true)
         {
             textEnd = false;
             DenialSceneScript.textOver = true;
@@ -197,7 +198,7 @@ public class DialogueScript : MonoBehaviour {
         ResponseText2.GetComponent<Graphic>().CrossFadeAlpha(0.01f, fadeDuration, true);
         ResponseText3.GetComponent<Graphic>().CrossFadeAlpha(0.01f, fadeDuration, true);
 
-        currTime = Time.realtimeSinceStartup;
+        currTime = Time.timeSinceLevelLoad;
         displayState = 0;
 
         updateTextLayout();
