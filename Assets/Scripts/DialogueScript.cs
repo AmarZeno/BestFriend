@@ -16,6 +16,7 @@ public class DialogueScript : MonoBehaviour {
     public GameObject ResponseText2;
     public GameObject ResponseText3;
     public GameObject ActionText;
+    public GameObject SunBlocker;
 
     public Text displayText1;
     public Text displayText2;
@@ -49,6 +50,8 @@ public class DialogueScript : MonoBehaviour {
     int actionTextLine = 0;
 
     public bool textEnd = false;
+
+    private bool canShowActionText = false;
 
     // Padding constants
     const int responseTextPadding = 20;
@@ -106,15 +109,13 @@ public class DialogueScript : MonoBehaviour {
         {
             currTime = Time.timeSinceLevelLoad;
             soundTime = 15000;
-            displayState =1;
-
+            displayState = 1;
         }
 
         if (Time.timeSinceLevelLoad > currTime + fadeDuration && displayState ==0)
         {
             choice(selection);
             displayState++;
-
         }
 
 
@@ -129,14 +130,34 @@ public class DialogueScript : MonoBehaviour {
             ResponseText1.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
             ResponseText2.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
             ResponseText3.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
+            displayState++;
         }
 
 
-        //if (Time.timeSinceLevelLoad > currTime + 13.0f && displayState == 2 && textEnd == false)
-        //{
-        //    //textEnd = false;
-        //    ActionText.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
-        //}
+        if (Time.timeSinceLevelLoad > currTime + 10.0f && canShowActionText == true && displayState == 3)
+        {
+          //  SunBlocker.SetActive(false);
+            ActionText.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
+        }
+
+        if (Time.timeSinceLevelLoad > currTime + 18.0f && canShowActionText == true && displayState == 3)
+        {
+            ActionText.GetComponent<Graphic>().CrossFadeAlpha(0.00f, 0.01f, true);
+            actionTextLine = 2;
+            displayState++;
+        }
+
+        if (Time.timeSinceLevelLoad > currTime + 108.0f && canShowActionText == true)
+        {
+            ActionText.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
+            displayState++;
+        }
+
+        if (Time.timeSinceLevelLoad > currTime + 118.0f && canShowActionText == true)
+        {
+            ActionText.GetComponent<Graphic>().CrossFadeAlpha(0.01f, 0.01f, true);
+        }
+
 
 
         if (Time.timeSinceLevelLoad > currTime + 7.0f && textEnd == true)
@@ -203,6 +224,7 @@ public class DialogueScript : MonoBehaviour {
             if (input == 1) { responseLine = 5; actionTextLine = 0; }
             if (input == 2) { responseLine = 6; actionTextLine = 1; }
             if (input == 3) { responseLine = 7; actionTextLine = 0; }
+            canShowActionText = true;
             textEnd = true;
         }
     }

@@ -7,6 +7,7 @@ public class Raycast : MonoBehaviour {
 
     public GameObject tvScreen;
     public GameObject infoboxCanvas;
+    public GameObject mainCanvas;
     public GameObject tvTextPanel;
     public GameObject lampLight;
     public GameObject crossHair;
@@ -79,6 +80,8 @@ public class Raycast : MonoBehaviour {
         tvScreenImage.CrossFadeAlpha(0.01f, 0.01f, true);
         tvScreen.SetActive(true);
         tvScreenImage.CrossFadeAlpha(1.0f, 2.0f, true);
+      //  movieRawImage.enabled = true;
+   //     mainCanvas.GetComponent<Vide>
     }
 
     public IEnumerator ToggleLampLight()
