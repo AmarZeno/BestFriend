@@ -1,76 +1,84 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class Raycast : MonoBehaviour {
 
+    public GameObject tvScreen;
     public GameObject infoboxCanvas;
     public GameObject tvTextPanel;
     public GameObject lampLight;
-    public bool isLampLightCoroutineExecuting = false;
-    public bool isRadioPlaying = false;
     public GameObject crossHair;
 
-    public float thickness = 0.5f;
+    private bool isLampLightCoroutineExecuting = false;
+    
+   // public float thickness = 0.5f;
 
-    public AudioSource audio;
+    private bool isRadioCoroutineExecuting = false;
+    private bool isRadioPlaying = false;
+    private AudioSource radioAudio;
+
+    Graphic tvScreenImage;
 
     void Awake()
     {
+        tvScreenImage = tvScreen.GetComponent<Image>();
         infoboxCanvas.SetActive(false);
-        audio = GetComponent<AudioSource>();
+        radioAudio = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        //  Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        // Ray ray = new Ray(transform.position, Vector3.forward);
 
         Transform camera = Camera.main.transform;
         Ray ray = new Ray(camera.position, camera.forward);
         RaycastHit hit;
-
-        // Using spherecast to increase the hit area
-        //  if (Physics.SphereCast(ray.origin, thickness, ray.direction, out hit))
-
         if (Physics.Raycast(ray, out hit, 100))
         {
             // Debug.DrawRay(camera.position, camera.forward * 10, Color.green);
             Debug.Log(hit.collider.name);
-            if (hit.collider.name == "TV")
-            {
-                infoboxCanvas.SetActive(true);
-                if (Input.GetMouseButton(0))
-                {
-                    tvTextPanel.SetActive(true);
-                    crossHair.SetActive(false);
-                }
+            switch (hit.collider.name) {
+                case "TV":
+                    infoboxCanvas.SetActive(true);
+                    if (Input.GetMouseButton(0))
+                    {
+                        WatchTV();
+                    }
+                    break;
+                case "Lamp":
+                    infoboxCanvas.SetActive(true);
+                    if (Input.GetMouseButton(0))
+                    {
+                        StartCoroutine(ToggleLampLight());
+                    }
+                    break;
+                case "Stereo":
+                    infoboxCanvas.SetActive(true);
+                    if (Input.GetMouseButton(0))
+                    {
+                        StartCoroutine(ToggleRadio());
+                    }
+                    break;
+                default:
+                    infoboxCanvas.SetActive(false);
+
+                    // Hide all the active components if any
+                    tvTextPanel.SetActive(false);
+                    tvScreen.SetActive(false);
+
+                    // Show the crosshair
+                    crossHair.SetActive(true);
+                    break;
             }
-            else if (hit.collider.name == "Lamp") {
-                infoboxCanvas.SetActive(true);
-                if (Input.GetMouseButton(0))
-                {
-                    StartCoroutine(ToggleLampLight());
-                }
-            } else if (hit.collider.name == "Stereo") {
-                infoboxCanvas.SetActive(true);
-                if (Input.GetMouseButton(0))
-                {
-                    ToggleRadio();
-                }
-            } else {
-                infoboxCanvas.SetActive(false);
-
-                // Hide all the active components if any
-                tvTextPanel.SetActive(false);
-
-                // Show the crosshair
-                crossHair.SetActive(true);
-            }
-
-
         }
+    }
+
+    public void  WatchTV() {
+        crossHair.SetActive(false);
+        tvScreenImage.CrossFadeAlpha(0.01f, 0.01f, true);
+        tvScreen.SetActive(true);
+        tvScreenImage.CrossFadeAlpha(1.0f, 2.0f, true);
     }
 
     public IEnumerator ToggleLampLight()
@@ -88,16 +96,26 @@ public class Raycast : MonoBehaviour {
         }
     }
 
-    public void ToggleRadio() {
-        if (isRadioPlaying == false)
+    public IEnumerator ToggleRadio() {
+        if (isRadioCoroutineExecuting == true)
         {
-            audio.Play();
-            audio.Play(44100);
-            isRadioPlaying = true;
+            yield return new WaitForSeconds(0.3f);
         }
         else {
-            audio.Stop();
-            isRadioPlaying = false;
+            isRadioCoroutineExecuting = true;
+            yield return new WaitForSeconds(0.3f);
+            if (isRadioPlaying == false)
+            {
+                radioAudio.Play();
+                radioAudio.PlayDelayed(44100);
+                isRadioPlaying = true;
+            }
+            else
+            {
+                radioAudio.Stop();
+                isRadioPlaying = false;
+            }
+            isRadioCoroutineExecuting = false;
         }
     }
 }
