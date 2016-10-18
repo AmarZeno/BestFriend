@@ -11,6 +11,7 @@ public class Raycast : MonoBehaviour {
     public GameObject tvTextPanel;
     public GameObject lampLight;
     public GameObject crossHair;
+    private VideoPlayback videoPlayBackScript;
 
     private bool isLampLightCoroutineExecuting = false;
     
@@ -27,6 +28,7 @@ public class Raycast : MonoBehaviour {
         tvScreenImage = tvScreen.GetComponent<Image>();
         infoboxCanvas.SetActive(false);
         radioAudio = GetComponent<AudioSource>();
+        videoPlayBackScript = mainCanvas.GetComponent<VideoPlayback>();
     }
 
     void Update()
@@ -67,6 +69,7 @@ public class Raycast : MonoBehaviour {
                     // Hide all the active components if any
                     tvTextPanel.SetActive(false);
                     tvScreen.SetActive(false);
+                    StopWatchingTV();
 
                     // Show the crosshair
                     crossHair.SetActive(true);
@@ -77,11 +80,21 @@ public class Raycast : MonoBehaviour {
 
     public void  WatchTV() {
         crossHair.SetActive(false);
-        tvScreenImage.CrossFadeAlpha(0.01f, 0.01f, true);
-        tvScreen.SetActive(true);
-        tvScreenImage.CrossFadeAlpha(1.0f, 2.0f, true);
-      //  movieRawImage.enabled = true;
-   //     mainCanvas.GetComponent<Vide>
+        //tvScreenImage.CrossFadeAlpha(0.01f, 0.01f, true);
+        //tvScreen.SetActive(true);
+        //tvScreenImage.CrossFadeAlpha(1.0f, 2.0f, true);
+
+        videoPlayBackScript.movieRawImage.enabled = true;
+        videoPlayBackScript.movieTexture.Play();
+        videoPlayBackScript.movieAudio.Play();
+        //  movieRawImage.enabled = true;
+        //     mainCanvas.GetComponent<Vide>
+    }
+
+    public void StopWatchingTV() {
+        videoPlayBackScript.movieRawImage.enabled = false;
+        videoPlayBackScript.movieTexture.Stop();
+        videoPlayBackScript.movieAudio.Stop();
     }
 
     public IEnumerator ToggleLampLight()
