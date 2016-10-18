@@ -45,6 +45,9 @@ public class DialogueScript : MonoBehaviour {
 
     public bool textEnd = false;
 
+    // Padding constants
+    const int responseTextPadding = 20;
+
     // Use this for initialization
     void Start () {
 
@@ -75,6 +78,7 @@ public class DialogueScript : MonoBehaviour {
 
         }
 
+        updateTextLayout();
     }
 	
 	// Update is called once per frame
@@ -153,8 +157,6 @@ public class DialogueScript : MonoBehaviour {
             selection = 3;
 
         }
-
-
     }
 
     void textTransition()
@@ -168,7 +170,7 @@ public class DialogueScript : MonoBehaviour {
         currTime = Time.realtimeSinceStartup;
         displayState = 0;
 
-        
+        updateTextLayout();
 
     }
 
@@ -193,5 +195,10 @@ public class DialogueScript : MonoBehaviour {
             if (input == 3) { responseLine = 7; }
             textEnd = true;
         }
+    }
+
+    void updateTextLayout() {
+        ResponseText2.transform.position = new Vector2(ResponseText1.transform.position.x + ResponseText1.GetComponent<RectTransform>().rect.width + responseTextPadding, ResponseText2.transform.position.y);
+        ResponseText3.transform.position = new Vector2(ResponseText2.transform.position.x + ResponseText2.GetComponent<RectTransform>().rect.width + responseTextPadding, ResponseText3.transform.position.y);
     }
 }
