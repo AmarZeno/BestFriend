@@ -10,6 +10,7 @@ public class Raycast : MonoBehaviour {
     public GameObject tvTextPanel;
     public GameObject lampLight;
     public GameObject crossHair;
+    public MovieTexture movTexture;
 
     private bool isLampLightCoroutineExecuting = false;
     
@@ -26,6 +27,10 @@ public class Raycast : MonoBehaviour {
         tvScreenImage = tvScreen.GetComponent<Image>();
         infoboxCanvas.SetActive(false);
         radioAudio = GetComponent<AudioSource>();
+    }
+
+    void Start() {
+        GetComponent<Renderer>().material.mainTexture = movTexture;
     }
 
     void Update()
@@ -75,10 +80,11 @@ public class Raycast : MonoBehaviour {
     }
 
     public void  WatchTV() {
-        crossHair.SetActive(false);
-        tvScreenImage.CrossFadeAlpha(0.01f, 0.01f, true);
-        tvScreen.SetActive(true);
-        tvScreenImage.CrossFadeAlpha(1.0f, 2.0f, true);
+        //crossHair.SetActive(false);
+        //tvScreenImage.CrossFadeAlpha(0.01f, 0.01f, true);
+        //tvScreen.SetActive(true);
+        //tvScreenImage.CrossFadeAlpha(1.0f, 2.0f, true);
+        movTexture.Play();
     }
 
     public IEnumerator ToggleLampLight()
