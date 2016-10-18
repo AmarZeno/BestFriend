@@ -50,8 +50,8 @@ public class DialogueScript : MonoBehaviour {
     int actionTextLine = 0;
 
     public bool textEnd = false;
-
     private bool canShowActionText = false;
+    public bool canSurpassTV = false;
 
     // Padding constants
     const int responseTextPadding = 20;
@@ -136,7 +136,7 @@ public class DialogueScript : MonoBehaviour {
 
         if (Time.timeSinceLevelLoad > currTime + 10.0f && canShowActionText == true && displayState == 3)
         {
-          //  SunBlocker.SetActive(false);
+           // SunBlocker.SetActive(false);
             ActionText.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
         }
 
@@ -151,6 +151,7 @@ public class DialogueScript : MonoBehaviour {
         {
             ActionText.GetComponent<Graphic>().CrossFadeAlpha(1.0f, fadeDuration, true);
             displayState++;
+            canSurpassTV = true;
         }
 
         if (Time.timeSinceLevelLoad > currTime + 118.0f && canShowActionText == true)

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class Raycast : MonoBehaviour {
@@ -11,7 +12,9 @@ public class Raycast : MonoBehaviour {
     public GameObject tvTextPanel;
     public GameObject lampLight;
     public GameObject crossHair;
+    public GameObject denialSceneManager;
     private VideoPlayback videoPlayBackScript;
+    private DialogueScript dialogueScript;
 
     private bool isLampLightCoroutineExecuting = false;
     
@@ -29,6 +32,7 @@ public class Raycast : MonoBehaviour {
         infoboxCanvas.SetActive(false);
         radioAudio = GetComponent<AudioSource>();
         videoPlayBackScript = mainCanvas.GetComponent<VideoPlayback>();
+        dialogueScript = denialSceneManager.GetComponent<DialogueScript>();
     }
 
     void Update()
@@ -80,21 +84,35 @@ public class Raycast : MonoBehaviour {
 
     public void  WatchTV() {
         crossHair.SetActive(false);
-        //tvScreenImage.CrossFadeAlpha(0.01f, 0.01f, true);
-        //tvScreen.SetActive(true);
-        //tvScreenImage.CrossFadeAlpha(1.0f, 2.0f, true);
 
-        videoPlayBackScript.movieRawImage.enabled = true;
-        videoPlayBackScript.movieTexture.Play();
-        videoPlayBackScript.movieAudio.Play();
-        //  movieRawImage.enabled = true;
-        //     mainCanvas.GetComponent<Vide>
+        if (dialogueScript.canSurpassTV == true)
+        {
+            // Hide action text if shown
+            dialogueScript.ActionText.GetComponent<Graphic>().CrossFadeAlpha(0.01f, 0.01f, true);
+            // Show the black screen
+            tvScreenImage.CrossFadeAlpha(0.00f, 0.01f, true);
+            tvScreen.SetActive(true);
+            tvScreenImage.CrossFadeAlpha(1.0f, 2.0f, true);
+            // Move to next scene
+            StartCoroutine(MoveToNextScene());
+        }
+        else {
+            videoPlayBackScript.movieRawImage.enabled = true;
+            videoPlayBackScript.movieTexture.Play();
+            videoPlayBackScript.movieAudio.Play();
+        }
     }
 
     public void StopWatchingTV() {
         videoPlayBackScript.movieRawImage.enabled = false;
         videoPlayBackScript.movieTexture.Stop();
         videoPlayBackScript.movieAudio.Stop();
+    }
+
+    public IEnumerator MoveToNextScene()
+    {
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene(2);
     }
 
     public IEnumerator ToggleLampLight()
