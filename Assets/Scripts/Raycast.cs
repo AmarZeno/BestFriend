@@ -8,14 +8,17 @@ public class Raycast : MonoBehaviour {
     public GameObject tvTextPanel;
     public GameObject lampLight;
     public bool isLampLightCoroutineExecuting = false;
-    public bool isRadioCoroutineExecuting = false;
+    public bool isRadioPlaying = false;
     public GameObject crossHair;
 
     public float thickness = 0.5f;
 
+    public AudioSource audio;
+
     void Awake()
     {
         infoboxCanvas.SetActive(false);
+        audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -52,7 +55,10 @@ public class Raycast : MonoBehaviour {
                 }
             } else if (hit.collider.name == "Stereo") {
                 infoboxCanvas.SetActive(true);
-                StartCoroutine(ToggleRadio());
+                if (Input.GetMouseButton(0))
+                {
+                    ToggleRadio();
+                }
             } else {
                 infoboxCanvas.SetActive(false);
 
@@ -82,17 +88,16 @@ public class Raycast : MonoBehaviour {
         }
     }
 
-    public IEnumerator ToggleRadio() {
-        yield return new WaitForSeconds(0.3f);
-        AudioSource audio = GetComponent<AudioSource>();
-        audio.Play();
-        audio.Play(44100);
-        //if (isRadioCoroutineExecuting == true)
-        //{
-        //    yield return new WaitForSeconds(0.3f);
-        //}
-        //else {
-        //    yield return new WaitForSeconds(0.3f);
-        //}
+    public void ToggleRadio() {
+        if (isRadioPlaying == false)
+        {
+            audio.Play();
+            audio.Play(44100);
+            isRadioPlaying = true;
+        }
+        else {
+            audio.Stop();
+            isRadioPlaying = false;
+        }
     }
 }
