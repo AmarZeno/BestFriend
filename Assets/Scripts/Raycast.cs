@@ -5,25 +5,25 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AudioSource))]
 public class Raycast : MonoBehaviour {
 
-    public GameObject BlackScreen;
+    public GameObject tvScreen;
     public GameObject infoboxCanvas;
     public GameObject tvTextPanel;
     public GameObject lampLight;
-    private bool isLampLightCoroutineExecuting = false;
-    
     public GameObject crossHair;
 
-    public float thickness = 0.5f;
+    private bool isLampLightCoroutineExecuting = false;
+    
+   // public float thickness = 0.5f;
 
     private bool isRadioCoroutineExecuting = false;
     private bool isRadioPlaying = false;
     private AudioSource radioAudio;
 
-    Graphic BlackScreenImage;
+    Graphic tvScreenImage;
 
     void Awake()
     {
-        BlackScreenImage = BlackScreen.GetComponent<Image>();
+        tvScreenImage = tvScreen.GetComponent<Image>();
         infoboxCanvas.SetActive(false);
         radioAudio = GetComponent<AudioSource>();
     }
@@ -65,7 +65,7 @@ public class Raycast : MonoBehaviour {
 
                     // Hide all the active components if any
                     tvTextPanel.SetActive(false);
-                    BlackScreen.SetActive(false);
+                    tvScreen.SetActive(false);
 
                     // Show the crosshair
                     crossHair.SetActive(true);
@@ -76,9 +76,9 @@ public class Raycast : MonoBehaviour {
 
     public void  WatchTV() {
         crossHair.SetActive(false);
-        BlackScreenImage.CrossFadeAlpha(0.01f, 0.01f, true);
-        BlackScreen.SetActive(true);
-        BlackScreenImage.CrossFadeAlpha(1.0f, 2.0f, true);
+        tvScreenImage.CrossFadeAlpha(0.01f, 0.01f, true);
+        tvScreen.SetActive(true);
+        tvScreenImage.CrossFadeAlpha(1.0f, 2.0f, true);
     }
 
     public IEnumerator ToggleLampLight()
