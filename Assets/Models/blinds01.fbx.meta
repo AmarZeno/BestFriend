@@ -1,0 +1,227 @@
+fileFormatVersion: 2
+guid: 0c35024385dc0ac4aa8890d5139bb5cd
+timeCreated: 1476907888
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: blinds:blinds2:group1
+    100004: blinds:blinds2:pCone1
+    100006: blinds:blinds2:pCone2
+    100008: blinds:blinds2:pCylinder7
+    100010: blinds:blinds2:pCylinder8
+    100012: blinds:group1
+    100014: blinds:pasted__pCylinder2
+    100016: blinds:pCube1
+    100018: blinds:pCube1 1
+    100020: blinds:pCube10
+    100022: blinds:pCube11
+    100024: blinds:pCube12
+    100026: blinds:pCube13
+    100028: blinds:pCube14
+    100030: blinds:pCube15
+    100032: blinds:pCube16
+    100034: blinds:pCube17
+    100036: blinds:pCube18
+    100038: blinds:pCube19
+    100040: blinds:pCube2
+    100042: blinds:pCube20
+    100044: blinds:pCube21
+    100046: blinds:pCube22
+    100048: blinds:pCube23
+    100050: blinds:pCube24
+    100052: blinds:pCube25
+    100054: blinds:pCube3
+    100056: blinds:pCube4
+    100058: blinds:pCube5
+    100060: blinds:pCube6
+    100062: blinds:pCube7
+    100064: blinds:pCube8
+    100066: blinds:pCube9
+    100068: blinds:pCylinder1
+    100070: blinds:pCylinder2
+    100072: blinds:pCylinder3
+    100074: blinds:pCylinder4
+    100076: blinds:pCylinder5
+    100078: blinds:pCylinder6
+    100080: blinds:transform1
+    100082: blinds:transform10
+    100084: blinds:transform11
+    100086: blinds:transform12
+    100088: blinds:transform13
+    100090: blinds:transform14
+    100092: blinds:transform15
+    100094: blinds:transform16
+    100096: blinds:transform17
+    100098: blinds:transform18
+    100100: blinds:transform19
+    100102: blinds:transform2
+    100104: blinds:transform20
+    100106: blinds:transform21
+    100108: blinds:transform22
+    100110: blinds:transform23
+    100112: blinds:transform24
+    100114: blinds:transform25
+    100116: blinds:transform26
+    100118: blinds:transform27
+    100120: blinds:transform28
+    100122: blinds:transform29
+    100124: blinds:transform3
+    100126: blinds:transform30
+    100128: blinds:transform31
+    100130: blinds:transform32
+    100132: blinds:transform33
+    100134: blinds:transform34
+    100136: blinds:transform35
+    100138: blinds:transform36
+    100140: blinds:transform4
+    100142: blinds:transform5
+    100144: blinds:transform6
+    100146: blinds:transform7
+    100148: blinds:transform8
+    100150: blinds:transform9
+    400000: //RootNode
+    400002: blinds:blinds2:group1
+    400004: blinds:blinds2:pCone1
+    400006: blinds:blinds2:pCone2
+    400008: blinds:blinds2:pCylinder7
+    400010: blinds:blinds2:pCylinder8
+    400012: blinds:group1
+    400014: blinds:pasted__pCylinder2
+    400016: blinds:pCube1
+    400018: blinds:pCube1 1
+    400020: blinds:pCube10
+    400022: blinds:pCube11
+    400024: blinds:pCube12
+    400026: blinds:pCube13
+    400028: blinds:pCube14
+    400030: blinds:pCube15
+    400032: blinds:pCube16
+    400034: blinds:pCube17
+    400036: blinds:pCube18
+    400038: blinds:pCube19
+    400040: blinds:pCube2
+    400042: blinds:pCube20
+    400044: blinds:pCube21
+    400046: blinds:pCube22
+    400048: blinds:pCube23
+    400050: blinds:pCube24
+    400052: blinds:pCube25
+    400054: blinds:pCube3
+    400056: blinds:pCube4
+    400058: blinds:pCube5
+    400060: blinds:pCube6
+    400062: blinds:pCube7
+    400064: blinds:pCube8
+    400066: blinds:pCube9
+    400068: blinds:pCylinder1
+    400070: blinds:pCylinder2
+    400072: blinds:pCylinder3
+    400074: blinds:pCylinder4
+    400076: blinds:pCylinder5
+    400078: blinds:pCylinder6
+    400080: blinds:transform1
+    400082: blinds:transform10
+    400084: blinds:transform11
+    400086: blinds:transform12
+    400088: blinds:transform13
+    400090: blinds:transform14
+    400092: blinds:transform15
+    400094: blinds:transform16
+    400096: blinds:transform17
+    400098: blinds:transform18
+    400100: blinds:transform19
+    400102: blinds:transform2
+    400104: blinds:transform20
+    400106: blinds:transform21
+    400108: blinds:transform22
+    400110: blinds:transform23
+    400112: blinds:transform24
+    400114: blinds:transform25
+    400116: blinds:transform26
+    400118: blinds:transform27
+    400120: blinds:transform28
+    400122: blinds:transform29
+    400124: blinds:transform3
+    400126: blinds:transform30
+    400128: blinds:transform31
+    400130: blinds:transform32
+    400132: blinds:transform33
+    400134: blinds:transform34
+    400136: blinds:transform35
+    400138: blinds:transform36
+    400140: blinds:transform4
+    400142: blinds:transform5
+    400144: blinds:transform6
+    400146: blinds:transform7
+    400148: blinds:transform8
+    400150: blinds:transform9
+    2300000: blinds:pCube1
+    3300000: blinds:pCube1
+    4300000: blinds:pCube1
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
