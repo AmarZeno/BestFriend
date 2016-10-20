@@ -13,11 +13,16 @@ public class Raycast : MonoBehaviour {
     public GameObject lampLight;
     public GameObject crossHair;
     public GameObject denialSceneManager;
-    public GameObject scrollingPanel;
+    public GameObject laptopScrollingPanel;
+    public GameObject mobileScrollingPanel;
     public GameObject laptopContainer;
+    public GameObject mobileContainer;
+
+
     private VideoPlayback videoPlayBackScript;
     private DialogueScript dialogueScript;
-    private ScrollRect scrollRectScript;
+    private ScrollRect laptopScrollRectScript;
+    private ScrollRect mobileScrollRectScript;
 
 
     private bool isLampLightCoroutineExecuting = false;
@@ -27,13 +32,10 @@ public class Raycast : MonoBehaviour {
     private bool isRadioCoroutineExecuting = false;
     private bool isRadioPlaying = false;
     private bool isViewingLaptop = false;
+    private bool isViewingMobile = false;
     private AudioSource radioAudio;
 
     Graphic tvScreenImage;
-
-    // Lerp
-    public float timeTakenDuringLerp = 1f;
-    private float _timeStartedLerping;
 
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
@@ -46,23 +48,27 @@ public class Raycast : MonoBehaviour {
         radioAudio = GetComponent<AudioSource>();
         videoPlayBackScript = mainCanvas.GetComponent<VideoPlayback>();
         dialogueScript = denialSceneManager.GetComponent<DialogueScript>();
-        scrollRectScript = scrollingPanel.GetComponent<ScrollRect>();
+        laptopScrollRectScript = laptopScrollingPanel.GetComponent<ScrollRect>();
+        mobileScrollRectScript = mobileScrollingPanel.GetComponent<ScrollRect>();
     }
 
     void FixedUpdate() {
-        if (isViewingLaptop)
-        {
-            laptopContainer.transform.localPosition = Vector2.Lerp(laptopContainer.transform.localPosition, new Vector2(0, 0), 1.0f * Time.fixedDeltaTime);
-            if (Input.GetMouseButton(0))
-            {
-                laptopContainer.transform.localPosition = Vector2.Lerp(laptopContainer.transform.localPosition, new Vector2(0, -500), 0.5f * Time.fixedDeltaTime);
-                isViewingLaptop = false;
-            }
-        }
+
+        // Show and close laptop if required
+        ShowAndCloseLaptop();
+        // Show and close mobile if requried
+        ShowAndCloseMobile();
     }
 
     void Update()
     {
+
+        GetMouseScroll();
+
+        // Cases to avoid ray casting
+        if (isViewingLaptop == true || isViewingMobile == true) {
+            return;
+        }
 
         Transform camera = Camera.main.transform;
         Ray ray = new Ray(camera.position, camera.forward);
@@ -96,6 +102,9 @@ public class Raycast : MonoBehaviour {
                 case "cellPhone":
                     {
                         infoboxCanvas.SetActive(true);
+                        if (Input.GetMouseButton(0)) {
+                            CheckMobile();
+                        }
                     }
                     break;
                 case "Laptop":
@@ -119,9 +128,7 @@ public class Raycast : MonoBehaviour {
                     crossHair.SetActive(true);
                     break;
             }
-        }
-
-        GetMouseScroll();
+        }    
     }
 
     public void  WatchTV() {
@@ -196,11 +203,56 @@ public class Raycast : MonoBehaviour {
     }
 
     public void CheckLaptop() {
-        isViewingLaptop = !isViewingLaptop;
+        isViewingLaptop = true;
     }
+
+    public void ShowAndCloseLaptop() {
+        if (isViewingLaptop)
+        {
+            crossHair.SetActive(false);
+            laptopContainer.transform.localPosition = Vector2.Lerp(laptopContainer.transform.localPosition, new Vector2(0, 0), 1.0f * Time.fixedDeltaTime);
+            if (Input.GetMouseButton(0))
+            {
+                isViewingLaptop = false;
+            }
+        }
+        else
+        {
+            laptopContainer.transform.localPosition = Vector2.Lerp(laptopContainer.transform.localPosition, new Vector2(0, -500), 1.0f * Time.fixedDeltaTime);
+            crossHair.SetActive(true);
+        }
+    }
+
+    public void CheckMobile()
+    {
+        isViewingMobile = true;
+    }
+
+    public void ShowAndCloseMobile() {
+        if (isViewingMobile)
+        {
+            crossHair.SetActive(false);
+            mobileContainer.transform.localPosition = Vector2.Lerp(mobileContainer.transform.localPosition, new Vector2(0, 240), 1.0f * Time.fixedDeltaTime);
+            if (Input.GetMouseButton(0))
+            {
+                isViewingMobile = false;
+            }
+        }
+        else {
+            mobileContainer.transform.localPosition = Vector2.Lerp(mobileContainer.transform.localPosition, new Vector2(0, -300), 1.0f * Time.fixedDeltaTime);
+            crossHair.SetActive(true);
+        }
+    }
+
 
     public void GetMouseScroll() {
         float scrollWheelValue = Input.GetAxis("Mouse ScrollWheel");
-        scrollRectScript.verticalScrollbar.value += scrollWheelValue;
+        if (isViewingLaptop == true)
+        {
+            laptopScrollRectScript.verticalScrollbar.value += scrollWheelValue;
+        }
+        else if (isViewingMobile == true) {
+            mobileScrollRectScript.verticalScrollbar.value += scrollWheelValue;
+        }
     }
 }
