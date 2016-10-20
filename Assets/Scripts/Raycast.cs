@@ -26,6 +26,10 @@ public class Raycast : MonoBehaviour {
 
     Graphic tvScreenImage;
 
+    void Start() {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     void Awake()
     {
         tvScreenImage = tvScreen.GetComponent<Image>();
