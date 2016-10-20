@@ -72,6 +72,11 @@ public class Raycast : MonoBehaviour {
                         infoboxCanvas.SetActive(true);
                     }
                     break;
+                case "Laptop":
+                    {
+                        infoboxCanvas.SetActive(true);
+                    }
+                    break;
                 default:
                     infoboxCanvas.SetActive(false);
 
