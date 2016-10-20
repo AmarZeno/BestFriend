@@ -17,6 +17,7 @@ public class Raycast : MonoBehaviour {
     public GameObject mobileScrollingPanel;
     public GameObject laptopContainer;
     public GameObject mobileContainer;
+    public GameObject letterContainer;
 
 
     private VideoPlayback videoPlayBackScript;
@@ -33,6 +34,7 @@ public class Raycast : MonoBehaviour {
     private bool isRadioPlaying = false;
     private bool isViewingLaptop = false;
     private bool isViewingMobile = false;
+    private bool isViewingLetter = false;
     private AudioSource radioAudio;
 
     Graphic tvScreenImage;
@@ -58,6 +60,8 @@ public class Raycast : MonoBehaviour {
         ShowAndCloseLaptop();
         // Show and close mobile if requried
         ShowAndCloseMobile();
+        // Show and close letter
+        ShowAndCloseLetter();
     }
 
     void Update()
@@ -66,7 +70,7 @@ public class Raycast : MonoBehaviour {
         GetMouseScroll();
 
         // Cases to avoid ray casting
-        if (isViewingLaptop == true || isViewingMobile == true) {
+        if (isViewingLaptop == true || isViewingMobile == true || isViewingLetter == true) {
             return;
         }
 
@@ -115,6 +119,13 @@ public class Raycast : MonoBehaviour {
                             CheckLaptop();
                         }
                     }
+                    break;
+                case "Card":
+                    infoboxCanvas.SetActive(true);
+                    if (Input.GetMouseButton(0)) {
+                        CheckLetter();
+                    }
+                    
                     break;
                 default:
                     infoboxCanvas.SetActive(false);
@@ -244,6 +255,25 @@ public class Raycast : MonoBehaviour {
         }
     }
 
+    public void CheckLetter() {
+        isViewingLetter = true;
+    }
+
+    public void ShowAndCloseLetter() {
+        if (isViewingLetter == true)
+        {
+            crossHair.SetActive(false);
+            letterContainer.SetActive(true);
+            if (Input.GetMouseButton(0)) {
+                isViewingLetter = false;
+            }
+        }
+        else {
+            crossHair.SetActive(true);
+            letterContainer.SetActive(false);
+        }
+    }
+
 
     public void GetMouseScroll() {
         float scrollWheelValue = Input.GetAxis("Mouse ScrollWheel");
@@ -252,7 +282,7 @@ public class Raycast : MonoBehaviour {
             laptopScrollRectScript.verticalScrollbar.value += scrollWheelValue;
         }
         else if (isViewingMobile == true) {
-            mobileScrollRectScript.verticalScrollbar.value += scrollWheelValue;
+           // mobileScrollRectScript.verticalScrollbar.value += scrollWheelValue;
         }
     }
 }
