@@ -13,8 +13,12 @@ public class Raycast : MonoBehaviour {
     public GameObject lampLight;
     public GameObject crossHair;
     public GameObject denialSceneManager;
+    public GameObject scrollingPanel;
+    public GameObject laptopContainer;
     private VideoPlayback videoPlayBackScript;
     private DialogueScript dialogueScript;
+    private ScrollRect scrollRectScript;
+
 
     private bool isLampLightCoroutineExecuting = false;
     
@@ -22,9 +26,14 @@ public class Raycast : MonoBehaviour {
 
     private bool isRadioCoroutineExecuting = false;
     private bool isRadioPlaying = false;
+    private bool isViewingLaptop = false;
     private AudioSource radioAudio;
 
     Graphic tvScreenImage;
+
+    // Lerp
+    public float timeTakenDuringLerp = 1f;
+    private float _timeStartedLerping;
 
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
@@ -37,6 +46,19 @@ public class Raycast : MonoBehaviour {
         radioAudio = GetComponent<AudioSource>();
         videoPlayBackScript = mainCanvas.GetComponent<VideoPlayback>();
         dialogueScript = denialSceneManager.GetComponent<DialogueScript>();
+        scrollRectScript = scrollingPanel.GetComponent<ScrollRect>();
+    }
+
+    void FixedUpdate() {
+        if (isViewingLaptop)
+        {
+            laptopContainer.transform.localPosition = Vector2.Lerp(laptopContainer.transform.localPosition, new Vector2(0, 0), 1.0f * Time.fixedDeltaTime);
+            if (Input.GetMouseButton(0))
+            {
+                laptopContainer.transform.localPosition = Vector2.Lerp(laptopContainer.transform.localPosition, new Vector2(0, -500), 0.5f * Time.fixedDeltaTime);
+                isViewingLaptop = false;
+            }
+        }
     }
 
     void Update()
@@ -79,6 +101,10 @@ public class Raycast : MonoBehaviour {
                 case "Laptop":
                     {
                         infoboxCanvas.SetActive(true);
+                        if (Input.GetMouseButton(0))
+                        {
+                            CheckLaptop();
+                        }
                     }
                     break;
                 default:
@@ -94,6 +120,8 @@ public class Raycast : MonoBehaviour {
                     break;
             }
         }
+
+        GetMouseScroll();
     }
 
     public void  WatchTV() {
@@ -165,5 +193,14 @@ public class Raycast : MonoBehaviour {
             }
             isRadioCoroutineExecuting = false;
         }
+    }
+
+    public void CheckLaptop() {
+        isViewingLaptop = !isViewingLaptop;
+    }
+
+    public void GetMouseScroll() {
+        float scrollWheelValue = Input.GetAxis("Mouse ScrollWheel");
+        scrollRectScript.verticalScrollbar.value += scrollWheelValue;
     }
 }
