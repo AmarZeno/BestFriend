@@ -18,6 +18,8 @@ public class TitleScreenScript : MonoBehaviour {
     {
         background.time = 53.21f;   // assuming that you already have reference to your AudioSource
         background.Play();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     void CameraMove()
         {
@@ -38,7 +40,7 @@ public class TitleScreenScript : MonoBehaviour {
         }
     void FixedUpdate()
     {
-
+        
         CameraMove();
 
     }

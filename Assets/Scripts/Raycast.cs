@@ -69,8 +69,14 @@ public class Raycast : MonoBehaviour {
 
         GetMouseScroll();
 
-        // Cases to avoid ray casting
-        if (isViewingLaptop == true || isViewingMobile == true || isViewingLetter == true) {
+        // Take the user to title screen
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
+
+            // Cases to avoid ray casting
+            if (isViewingLaptop == true || isViewingMobile == true || isViewingLetter == true) {
             return;
         }
 

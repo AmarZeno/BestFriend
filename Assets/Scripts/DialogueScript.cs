@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DialogueScript : MonoBehaviour {
 
@@ -92,6 +93,8 @@ public class DialogueScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
 
         displayText1.text = displayLines1[responseLine];
         displayText2.text = displayLines2[responseLine];
