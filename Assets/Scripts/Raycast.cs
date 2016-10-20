@@ -67,6 +67,11 @@ public class Raycast : MonoBehaviour {
                         StartCoroutine(ToggleRadio());
                     }
                     break;
+                case "cellPhone":
+                    {
+                        infoboxCanvas.SetActive(true);
+                    }
+                    break;
                 default:
                     infoboxCanvas.SetActive(false);
 
