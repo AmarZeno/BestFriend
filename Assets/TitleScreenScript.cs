@@ -32,6 +32,7 @@ public class TitleScreenScript : MonoBehaviour {
         else
         {
             Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(1.555f, 4.063f,5.121f), 1.0f * Time.fixedDeltaTime);
+            CreditsBack = false;
         }    
 
         }
@@ -69,7 +70,7 @@ public class TitleScreenScript : MonoBehaviour {
         Title.SetActive(true);
         Credits.SetActive(false);
         CreditsBack = true;
-
+        IsCameraMoving = false;
     }
 
     
