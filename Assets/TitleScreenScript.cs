@@ -18,6 +18,8 @@ public class TitleScreenScript : MonoBehaviour {
     {
         background.time = 53.21f;   // assuming that you already have reference to your AudioSource
         background.Play();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     void CameraMove()
         {
@@ -32,12 +34,13 @@ public class TitleScreenScript : MonoBehaviour {
         else
         {
             Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(1.555f, 4.063f,5.121f), 1.0f * Time.fixedDeltaTime);
+            CreditsBack = false;
         }    
 
         }
     void FixedUpdate()
     {
-
+        
         CameraMove();
 
     }
@@ -69,7 +72,7 @@ public class TitleScreenScript : MonoBehaviour {
         Title.SetActive(true);
         Credits.SetActive(false);
         CreditsBack = true;
-
+        IsCameraMoving = false;
     }
 
     
