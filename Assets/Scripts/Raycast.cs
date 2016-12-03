@@ -12,6 +12,8 @@ public class Raycast : MonoBehaviour {
     public GameObject tvTextPanel;
     public GameObject lampLight;
     public GameObject crossHair;
+    public GameObject staticCrossHair;
+    public GameObject interactiveCrossHair;
     public GameObject denialSceneManager;
     public GameObject laptopScrollingPanel;
     public GameObject mobileScrollingPanel;
@@ -83,13 +85,14 @@ public class Raycast : MonoBehaviour {
         Transform camera = Camera.main.transform;
         Ray ray = new Ray(camera.position, camera.forward);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, 10))
         {
-            // Debug.DrawRay(camera.position, camera.forward * 10, Color.green);
+            Debug.DrawRay(camera.position, camera.forward * 10, Color.green);
             Debug.Log(hit.collider.name);
             switch (hit.collider.name) {
                 case "TV":
                     infoboxCanvas.SetActive(true);
+                    interactiveCrossHair.SetActive(true);
                     if (Input.GetMouseButton(0))
                     {
                         WatchTV();
@@ -97,6 +100,7 @@ public class Raycast : MonoBehaviour {
                     break;
                 case "Lamp":
                     infoboxCanvas.SetActive(true);
+                    interactiveCrossHair.SetActive(true);
                     if (Input.GetMouseButton(0))
                     {
                         StartCoroutine(ToggleLampLight());
@@ -104,6 +108,7 @@ public class Raycast : MonoBehaviour {
                     break;
                 case "Stereo":
                     infoboxCanvas.SetActive(true);
+                    interactiveCrossHair.SetActive(true);
                     if (Input.GetMouseButton(0))
                     {
                         StartCoroutine(ToggleRadio());
@@ -112,6 +117,7 @@ public class Raycast : MonoBehaviour {
                 case "cellPhone":
                     {
                         infoboxCanvas.SetActive(true);
+                        interactiveCrossHair.SetActive(true);
                         if (Input.GetMouseButton(0)) {
                             CheckMobile();
                         }
@@ -120,6 +126,7 @@ public class Raycast : MonoBehaviour {
                 case "Laptop":
                     {
                         infoboxCanvas.SetActive(true);
+                        interactiveCrossHair.SetActive(true);
                         if (Input.GetMouseButton(0))
                         {
                             CheckLaptop();
@@ -128,6 +135,7 @@ public class Raycast : MonoBehaviour {
                     break;
                 case "Card":
                     infoboxCanvas.SetActive(true);
+                    interactiveCrossHair.SetActive(true);
                     if (Input.GetMouseButton(0)) {
                         CheckLetter();
                     }
@@ -135,7 +143,7 @@ public class Raycast : MonoBehaviour {
                     break;
                 default:
                     infoboxCanvas.SetActive(false);
-
+                    interactiveCrossHair.SetActive(false);
                     // Hide all the active components if any
                     tvTextPanel.SetActive(false);
                     tvScreen.SetActive(false);
