@@ -59,6 +59,7 @@ public class DialogueScript : MonoBehaviour {
     int conversationSet = 0;
     int displayState = 5;
     int actionTextLine = 0;
+    const int responseSpriteOffset = 8;
 
     public bool textEnd = false;
     private bool canShowActionText = false;
@@ -127,9 +128,10 @@ public class DialogueScript : MonoBehaviour {
         // Prevent array out of bounds
         if (conversationSet <= 6)
         {
-            ResponseImage1.sprite = ConversationSprites[8 + 0 + conversationSet];
-            ResponseImage2.sprite = ConversationSprites[8 + 1 + conversationSet];
-            ResponseImage3.sprite = ConversationSprites[8 + 2 + conversationSet];
+            // Logic = Offset + ResponseIndex + ConversationSet
+            ResponseImage1.sprite = ConversationSprites[responseSpriteOffset + 0 + conversationSet];
+            ResponseImage2.sprite = ConversationSprites[responseSpriteOffset + 1 + conversationSet];
+            ResponseImage3.sprite = ConversationSprites[responseSpriteOffset + 2 + conversationSet];
         }
         else {
             ResponseImage1.gameObject.SetActive(false);
