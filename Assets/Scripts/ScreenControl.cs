@@ -13,13 +13,14 @@ public class ScreenControl : MonoBehaviour {
 
 	void Start () {
 
-        BlackScreenImage = BlackScreen.GetComponent<Image>();
         
+        BlackScreenImage = BlackScreen.GetComponent<Image>();
+
     }
 
     public void FadeBlack()
     {
-        if(click == false)
+        if(click == false && Time.timeSinceLevelLoad > 0.5f)
         {
             currTime = Time.realtimeSinceStartup;
             BlackScreenImage.CrossFadeAlpha(0.0f, 4.0f, true);
@@ -29,6 +30,7 @@ public class ScreenControl : MonoBehaviour {
 
     void Update()
     {
+
         if (click == true)
         {
             if(Time.realtimeSinceStartup > currTime + waitTime)
@@ -41,6 +43,11 @@ public class ScreenControl : MonoBehaviour {
         }
 
 
+    }
+
+    public void Deactivate(GameObject i_object)
+    {
+        i_object.SetActive(false);
     }
 
 }

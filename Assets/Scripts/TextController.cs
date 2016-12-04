@@ -124,11 +124,16 @@ public class TextController : MonoBehaviour {
             titleTextBox.GetComponent<Graphic>().CrossFadeAlpha(1.0f, 2.0f, true);
             title++;
         }
-        if (Time.realtimeSinceStartup > currTime + 8.0f && title == 2)
+        if (Time.realtimeSinceStartup > currTime + 9.0f && title == 2)
+        {
+            titleTextBox.GetComponent<Graphic>().CrossFadeAlpha(0.01f, 0.01f, true);
+            title++;
+        }
+
+        if (Time.realtimeSinceStartup > currTime + 11.0f && title == 3)
         {
             SceneManager.LoadScene("Denial");
         }
-
 
     }
 
@@ -160,5 +165,6 @@ public class TextController : MonoBehaviour {
     {
         AudioSource music = GetComponent<AudioSource>();
         music.Play();
+        music.loop = true;
     }
 }
